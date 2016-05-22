@@ -1,0 +1,27 @@
+{
+  "name": "http-simple-persistence",
+  "version": "1.0.0",
+  "description": "![cf](http://i.imgur.com/7v5ASc8.png) http-simple-persistence ====",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/araedavis/http-simple-persistence.git"
+  },
+  "author": "allison davis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/araedavis/http-simple-persistence/issues"
+  },
+  "homepage": "https://github.com/araedavis/http-simple-persistence#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^2.10.2",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-spawn-mocha": "^2.2.2",
+    "mocha": "^2.4.5"
+  }
+}
