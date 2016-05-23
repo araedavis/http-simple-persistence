@@ -18,7 +18,7 @@ database.read = function(file, callback){
 
 database.create = function(newFile, content){
   var writeStream = fs.createWriteStream(`${database.directory}/${newFile}`);
-  writeStream.write(content);
+  writeStream.write(content.toString());
 };
 
 database.update = function(file, content){
