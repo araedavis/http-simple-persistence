@@ -31,22 +31,4 @@ describe('running http server', () => {
     done();
   });
 
-  it('PUT', (done) => {
-    request
-      .put('/dinosaurs/trex.json')
-      .then((res) => {
-        assert.equal(res.statusCode, 200);
-      })
-      .catch(done());
-
-  });
-
-  it('DELETE', (done) => {
-    request
-      .delete('')
-      .end((res) => {
-        assert.equal(res.statusCode, 200);
-      });
-    done();
-  });
 });
