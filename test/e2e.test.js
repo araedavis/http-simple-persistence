@@ -35,7 +35,7 @@ describe('running http server', () => {
     request
       .put('/dinosaurs/trex.json')
       .then((res) => {
-        assert.equal(res.statusCode, 700);
+        assert.equal(res.statusCode, 200);
       })
       .catch(done());
 

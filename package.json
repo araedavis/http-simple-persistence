@@ -4,7 +4,9 @@
   "description": "![cf](http://i.imgur.com/7v5ASc8.png) http-simple-persistence ====",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp",
+    "lint": "gulp run-lint",
+    "dev": "mocha test -w"
   },
   "repository": {
     "type": "git",
