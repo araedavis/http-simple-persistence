@@ -1,11 +1,5 @@
-var server = require('./server');
-var router = require('./lib/router');
-var requestHandlers = require('./requestHandlers');
+const server = require('./server');
 
-var handle = {};
-handle['/'] = requestHandlers.start;
-handle['/start'] = requestHandlers.start;
-handle['/upload'] = requestHandlers.upload;
-
-
-server.start(router.route, handle);
+server.listen(8080, () => {
+  console.log('Clever girl');
+});

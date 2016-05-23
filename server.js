@@ -1,26 +1,22 @@
-var http = require('http');
-var url = require('url');
+const http = require('http');
+const path = require('path');
+const db = require('./data');
 
-function start(route, handle){
-  function onRequest(request, response){
-    var postData = "";
-    var pathname = url.parse(request.url).pathname;
-    console.log(`request for ${pathname} received`);
+var server = http.createServer((req, res) => {
+  var baseName = path.parse(req.url).base;
 
-    request.setEncoding('utf8');
-
-    request.addListener('data', function(postDataChunk){
-      postData += postDataChunk;
-      console.log(`received POST data chunk ${postDataChunk}`);
-    });
-
-    request.addListener('end', function(){
-      route(handle, pathname, response, postData)
+  if(req.method === 'GET'){
+    db.database.fetchAll(function(err, array){
+      var index = array.indexOf(baseName);
+      if(index !== -1){
+        db.database.read(array[index], function(contents){
+          res.writeHead(200, {'Content-Type': 'application/json'});
+          res.write(contents);
+          res.end();
+        });
+      }
     });
   }
+});
 
-  http.createServer(onRequest).listen(8080);
-  console.log('Server started on port 8080');
-}
-
-exports.start = start;
+module.exports = server;
