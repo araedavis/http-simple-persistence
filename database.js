@@ -16,9 +16,16 @@ database.read = function(file, callback){
   });
 };
 
-database.write = function(newFile, content){
+database.create = function(newFile, content){
   var writeStream = fs.createWriteStream(`${database.directory}/${newFile}`);
   writeStream.write(content);
+};
+
+database.update = function(file, content){
+  fs.writeFile(file, content, (err) => {
+    if (err) throw (err);
+    console.log(`${file} updated`);
+  });
 };
 
 database.destroy = function(path, callback){

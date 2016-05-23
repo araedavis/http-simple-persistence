@@ -2,41 +2,55 @@ const chai = require('chai');
 const assert = chai.assert;
 chai.use(require('chai-http'));
 
-const app = require('../app');
+const server = require('../server');
 
-describe('running http sever', () => {
-  const request = chai.request(app);
 
-  describe('POST and GET a dino', () => {
-    var dino = {name: 'trex'};
-    var id = -1;
+describe('running http server', () => {
+  const request = chai.request(server);
 
-    function isJSONResponse(res){
-      assert.equal(res.statusCode, 200);
-      assert.equal(res.type, 'application/json');
-      assert.ok(res.body);
-    }
+  var dino = '{"name": "trex"}';
 
-    it('POST', done => {
-      request
-        .post('/dinosaurs')
-        .send(dino)
-        .then(res => {
-          isJSONResponse(res);
+  it('GET', (done) =>{
+    request
+      .get('/dinosaurs/trex.json')
+      .end((err, res) =>{
+        if(err) console.log(err);
+        assert.equal(res.text, dino);
+      });
+    done();
+  });
 
-          assert.equal(res.body.name, dino.name);
-          assert.property(res.body, id);
-        });
-      done();
-    });
+  it('POST', (done) => {
+    request
+      .post('/dinosaurs')
+      .send(dino)
+      .end((err, res) =>{
+        if(err) console.log(err);
+        assert.equal(res.statusCode, 200);
+        assert.equal(res.body.name, dino.name);
+        assert.equal(res.type, 'application/json');
+      });
+    done();
+  });
 
-    it('GET', done => {
-      request.get('/dinosaurs/${id}')
-        .then( res => {
-          isJSONResponse(res);
-          assert.equal(res.body.name, dino.name);
-        });
-      done();
-    });
+  it('PUT', (done) => {
+    request
+      .put('/dinosaurs/trex.json')
+
+      .end((err, res) => {
+        if (err) console.log(err);
+        assert.equal(res.statusCode, 200);
+      });
+    done();
+  });
+
+  it('DELETE', (done) => {
+    request
+      .delete('')
+      .end((err, res) => {
+        if(err) console.log(err);
+        assert.equal(res.statusCode, 200);
+      });
+    done();
   });
 });
